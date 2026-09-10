@@ -1,0 +1,14 @@
+# Environment variables
+.env
+
+# Node dependencies (once we add the backend)
+node_modules/
+
+# OS files
+desktop.ini
+.DS_Store
+
+# Docker volumes data (if ever bind-mounted locally)
+*.log
+
+backups/
