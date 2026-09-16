@@ -1,4 +1,5 @@
 services:
+
   postgres:
     image: postgres:16
     restart: unless-stopped
@@ -9,20 +10,26 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - "5432:5432"
     networks:
       - backend-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
 
   redis:
     image: redis:7
     restart: unless-stopped
     volumes:
       - redis_data:/data
-    ports:
-      - "6379:6379"
     networks:
       - backend-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
 
   backend:
     build: ./backend
@@ -35,6 +42,11 @@ services:
     networks:
       - backend-network
       - frontend-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
 
   backend2:
     build: ./backend
@@ -47,12 +59,22 @@ services:
     networks:
       - backend-network
       - frontend-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
 
   frontend:
     build: ./frontend
     restart: unless-stopped
     networks:
       - frontend-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 64M
 
   nginx:
     build: ./nginx
@@ -64,6 +86,11 @@ services:
       - "80:80"
     networks:
       - frontend-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 64M
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
@@ -98,6 +125,7 @@ services:
       - "3000:3000"
     networks:
       - backend-network
+
   loki:
     image: grafana/loki:latest
     restart: unless-stopped

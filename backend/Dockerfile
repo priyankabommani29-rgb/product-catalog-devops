@@ -7,6 +7,9 @@ RUN npm install
 
 COPY . .
 
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
 EXPOSE 5000
 
 CMD ["node", "server.js"]
