@@ -36,3 +36,23 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/product-catalog-nginx:latest -t ${{ secrets.DOCKER_USERNAME }}/product-catalog-nginx:${{ github.sha }} ./nginx
           docker push ${{ secrets.DOCKER_USERNAME }}/product-catalog-nginx:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/product-catalog-nginx:${{ github.sha }}
+
+  # Deployment job — documented but not active.
+  # Requires a provisioned server with Docker, Docker Compose, and this repo cloned.
+  # Enable by removing the `if: false` condition and configuring the required secrets:
+  #   VM_HOST, VM_USER, VM_SSH_KEY
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: false
+
+    steps:
+      - name: Deploy to server via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          script: |
+            cd ~/product-catalog-devops
+            bash deploy.sh
