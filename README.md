@@ -149,7 +149,31 @@ See [SECURITY.md](./SECURITY.md) for the full checklist.
 
 ## Screenshots
 
-[embed the 6 screenshots here]
+## Screenshots
+
+### 1. Docker Compose — All Services
+
+![Docker Compose](./screenshots/01-docker-compose-ps.png)
+
+### 2. Product Catalog
+
+![Product Catalog](./screenshots/02-product-catalog.png)
+
+### 3. Grafana CPU Dashboard
+
+![Grafana CPU Dashboard](./screenshots/03-grafana-cpu-dashboard.png)
+
+### 4. Grafana Explore — Loki Logs
+
+![Loki Logs](./screenshots/04-grafana-loki-logs.png)
+
+### 5. GitHub Actions CI/CD
+
+![GitHub Actions](./screenshots/05-github-actions.png)
+
+### 6. Docker Hub Images
+
+![Docker Hub](./screenshots/06-docker-hub-images.png)
 
 ## Issues Faced & Solutions
 
