@@ -149,8 +149,6 @@ See [SECURITY.md](./SECURITY.md) for the full checklist.
 
 ## Screenshots
 
-## Screenshots
-
 ### 1. Docker Compose — All Services
 
 ![Docker Compose](./screenshots/01-docker-compose-ps.png)
